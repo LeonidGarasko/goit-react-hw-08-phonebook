@@ -2,11 +2,10 @@ import styled from 'styled-components';
 
 export const CardWrapper = styled.div`
   width: 300px;
-  padding: ${p => p.theme.space[3]}px;
+  padding-top: ${p => p.theme.space[5]}px;
 
   background-color: ${p => p.theme.colors.white};
   border-radius: ${p => p.theme.radii.md};
-
   text-align: center;
 `;
 export const Avatar = styled.img`
@@ -19,6 +18,9 @@ export const Avatar = styled.img`
 export const InfoContainer = styled.ul`
   display: flex;
   justify-content: center;
-  gap: ${p => p.theme.space[4]}px;
+  gap: ${p => p.theme.space[5]}px;
+  margin: 0px;
   padding-left: 0px;
+  background-color: ${p => p.theme.colors.primary};
+  border-top: ${p => p.theme.borders.normal};
 `;

@@ -25,6 +25,7 @@ export const theme = {
   },
   fontWeights: {
     normal: 400,
+    middle: 550,
     bold: 700,
   },
   lineHeights: {
@@ -34,6 +35,7 @@ export const theme = {
   borders: {
     none: 'none',
     normal: '1px solid',
+    table: '3px solid black',
   },
   radii: {
     none: '0',

@@ -17,17 +17,29 @@ export const Profile = ({ username, tag, location, avatar, stats }) => {
           {location}
         </Box>
         <InfoContainer>
-          <Box as="li" display="flex" flexDirection="column">
-            <span>Followers</span>
-            <span>{stats.followers}</span>
+          <Box as="li" display="flex" flexDirection="column" pt={4} pb={4}>
+            <Box fontSize="s" opacity={0.8} color="text" mb={2}>
+              Followers
+            </Box>
+            <Box fontSize="m" fontWeight="bold" color="text">
+              {stats.followers}
+            </Box>
           </Box>
-          <Box as="li" display="flex" flexDirection="column">
-            <Box fontSize="s" opacity={0.8} color="text" mb={3}>Views</Box fontSize="s" opacity={0.8} color="text" mb={3}>
-            <Box fontSize="s" opacity={0.8} color="text" mb={3}>{stats.views}</Box fontSize="s" opacity={0.8} color="text" mb={3}>
+          <Box as="li" display="flex" flexDirection="column" pt={4} pb={4}>
+            <Box fontSize="s" opacity={0.8} color="text" mb={2}>
+              Views
+            </Box>
+            <Box fontSize="m" fontWeight="bold" color="text">
+              {stats.views}
+            </Box>
           </Box>
-          <Box as="li" display="flex" flexDirection="column">
-            <Box fontSize="s" opacity={0.8} color="text" mb={3}>Likes</Box fontSize="s" opacity={0.8} color="text" mb={3}>
-            <Box fontSize="s" opacity={0.8} color="text" mb={3}>{stats.likes}</Box fontSize="s" opacity={0.8} color="text" mb={3}>
+          <Box as="li" display="flex" flexDirection="column" pt={4} pb={4}>
+            <Box fontSize="s" opacity={0.8} color="text" mb={2}>
+              Likes
+            </Box>
+            <Box fontSize="m" fontWeight="bold" color="text">
+              {stats.likes}
+            </Box>
           </Box>
         </InfoContainer>
       </CardWrapper>
@@ -40,7 +52,9 @@ Profile.propTypes = {
   tag: PropTypes.string.isRequired,
   location: PropTypes.string.isRequired,
   avatar: PropTypes.string.isRequired,
-  followers: PropTypes.number.isRequired,
-  views: PropTypes.number.isRequired,
-  likes: PropTypes.number.isRequired,
+  stats: PropTypes.exact({
+    followers: PropTypes.number.isRequired,
+    views: PropTypes.number.isRequired,
+    likes: PropTypes.number.isRequired,
+  }).isRequired,
 };
