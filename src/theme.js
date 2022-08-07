@@ -10,7 +10,7 @@ export const theme = {
     muted: '#f6f6f6',
     gray: '#F7F7F7',
   },
-  space: [0, 2, 4, 8, 16, 32, 64, 128, 256],
+  space: [0, 2, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
     body: 'system-ui, sans-serif',
     heading: 'system-ui, sans-serif',
