@@ -1,20 +1,13 @@
+import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
-
-import { Box } from './Box';
+import { Feedback } from './Feedback/Feedback';
 
 export class App extends Component {
   render() {
     return (
       <>
-        <Box
-          as="header"
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          flexDirection="column"
-        >
-          <GlobalStyle />
-        </Box>
+        <Feedback />
+        <GlobalStyle />
       </>
     );
   }
