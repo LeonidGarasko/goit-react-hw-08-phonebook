@@ -6,7 +6,6 @@ export class App extends Component {
   render() {
     return (
       <>
-        <Feedback />
         <GlobalStyle />
       </>
     );
