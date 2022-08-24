@@ -1,60 +1,49 @@
-import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import styled from 'styled-components';
+import { Component } from 'react';
+import { InputName } from './Input/InputName/InputName';
+import { LabelPhoneBook } from './Label/Label';
+import { ButtonSubmit } from './Button/ButtonSubmit';
+import { InputNumber } from './Input/InputNumber/inputNumber';
+import { FormPhonebook } from './Form/Form';
 
-const ErrorText = styled.p`
-  color: red;
-`;
-
-const FormError = ({ name }) => {
-  return (
-    <ErrorMessage
-      name={name}
-      render={message => <ErrorText>{message}</ErrorText>}
-    />
-  );
-};
-
-const validationSchema = Yup.object({
-  name: Yup.string().required(),
-  number: Yup.number().min(1).max(10),
-});
-
-const initialValues = {
-  name: '',
-  nubmer: '',
-};
-
-export const Phonebook = () => {
-  const handleSubmit = (values, { resetForm }) => {
-    console.log(values);
-    resetForm();
+export class Phonebook extends Component {
+  state = {
+    name: '',
+    number: '',
   };
 
-  return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form autoComplete="off">
-        <div>
-          <label htmlFor="name">Name</label>
-          <div>
-            <Field name="name" type="text" placeholder="Full name" />
-            <FormError name="name" />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="nubmer">Number</label>
-          <div>
-            <Field name="nubmer" type="text" placeholder="Nubmer" />
-            <FormError name="email" />
-          </div>
-        </div>
-        <button type="submit">Add contact</button>
-      </Form>
-    </Formik>
-  );
-};
+  handleChange = e => {
+    const { name, value } = e.currentTarget;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  reset = () => {
+    this.setState({ name: '', number: '' });
+  };
+
+  clickOnBtnSubmit = e => {
+    e.preventDefault();
+    this.props.onSubmit(this.state);
+    this.reset();
+  };
+
+  render() {
+    return (
+      <>
+        <FormPhonebook onSubmit={this.clickOnBtnSubmit}>
+          <LabelPhoneBook title="Name">
+            <InputName value={this.state.name} onChange={this.handleChange} />
+          </LabelPhoneBook>
+          <LabelPhoneBook title="Number">
+            <InputNumber
+              value={this.state.number}
+              onChange={this.handleChange}
+            />
+          </LabelPhoneBook>
+          <ButtonSubmit text="Add contact" />
+        </FormPhonebook>
+      </>
+    );
+  }
+}
