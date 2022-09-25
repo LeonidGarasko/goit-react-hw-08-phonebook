@@ -4,10 +4,15 @@ import { LabelPhoneBook } from './Label/Label';
 import { ButtonSubmit } from './Button/ButtonSubmit';
 import { InputNumber } from './Input/InputNumber/inputNumber';
 import { FormPhonebook } from './Form/Form';
+import { nanoid } from 'nanoid/non-secure';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
-export const Phonebook = ({ onSubmit }) => {
+export const Phonebook = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
 
   const handleChange = e => {
     switch (e.currentTarget.name) {
@@ -25,9 +30,19 @@ export const Phonebook = ({ onSubmit }) => {
     setName('');
     setNumber('');
   };
+  const formSubmitHandle = data => {
+    const id = nanoid();
+    if (contacts.filter(contact => contact.name === data.name).length > 0) {
+      alert(`${data.name} is already in contacts`);
+      return;
+    }
+    data.id = id;
+
+    dispatch(addContact(data));
+  };
   const clickOnBtnSubmit = e => {
     e.preventDefault();
-    onSubmit({ name, number });
+    formSubmitHandle({ name, number });
     reset();
   };
 
