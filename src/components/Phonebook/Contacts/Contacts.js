@@ -26,11 +26,7 @@ export const Contacts = ({ name }) => {
             <span>
               {data.name} {data.number}
             </span>
-            <ButtonDelete
-              name="Delete"
-              onClickDelete={() => dispatch(removeContact(data.id))}
-              id={data.id}
-            />
+            <ButtonDelete id={data.id} />
           </li>
         ))}
       </ul>
