@@ -4,15 +4,14 @@ import { InputFilter } from '../Input/InputFilter/inputFilter';
 import { LabelFilter } from '../Label/LabelFilter/LabelFilter';
 import { ButtonDelete } from '../Button/ButtonDelete/ButtonDelete';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { removeContact } from 'redux/contactsSlice';
+import { useGetContactsQuery } from 'redux/contactsApi';
+import { useSelector } from 'react-redux';
 
 export const Contacts = ({ name }) => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
-  const filter = useSelector(state => state.contacts.filter);
+  const { data } = useGetContactsQuery();
+  const filter = useSelector(state => state.filter);
   const normolizeFilter = filter.toLowerCase();
-  const visibleContacts = contacts.filter(contact =>
+  const visibleContacts = data.filter(contact =>
     contact.name.toLowerCase().includes(normolizeFilter)
   );
   return (
@@ -22,15 +21,15 @@ export const Contacts = ({ name }) => {
         <InputFilter />
       </LabelFilter>
       <ul>
-        {visibleContacts.map(contact => (
-          <li key={contact.id}>
+        {visibleContacts.map(data => (
+          <li key={data.id}>
             <span>
-              {contact.name} {contact.number}
+              {data.name} {data.number}
             </span>
             <ButtonDelete
               name="Delete"
-              onClickDelete={() => dispatch(removeContact(contact.id))}
-              id={contact.id}
+              onClickDelete={() => dispatch(removeContact(data.id))}
+              id={data.id}
             />
           </li>
         ))}

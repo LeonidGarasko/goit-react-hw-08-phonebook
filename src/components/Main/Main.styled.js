@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MainPage = styled.div`
   margin-left: auto;
   margin-right: auto;
-  margin-top: ${p => p.theme.space[4]}px;
+  margin-top: ${p => p.theme.space[3]}px;
   width: 500px;
   display: flex;
   flex-direction: column;
