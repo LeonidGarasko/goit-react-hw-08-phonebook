@@ -1,21 +1,27 @@
 import React from 'react';
-import { ButtonDeleteStyle } from './ButtonDelete.styled';
+import ButtonDeleteStyle from './ButtonDelete.styled';
 import PropTypes from 'prop-types';
-import { useDeleteContactMutation } from 'redux/contactsApi';
+import contactsOperation from 'redux/contacts/contacts-operation';
+import { useDispatch } from 'react-redux';
+import { IoTrashBinSharp } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
 
-export const ButtonDelete = ({ id }) => {
-  const [deleteContact, { isLoading }] = useDeleteContactMutation();
+const ButtonDelete = ({ id }) => {
+  const dispatch = useDispatch();
+  const isLoad = useSelector(state => state.contacts.isLoad);
 
   return (
     <ButtonDeleteStyle
       type="button"
-      disabled={isLoading}
-      onClick={() => deleteContact(id)}
+      disabled={isLoad}
+      onClick={() => dispatch(contactsOperation.deleteContact(id))}
     >
-      {isLoading ? 'wait..' : 'Delete'}
+      <IoTrashBinSharp />
     </ButtonDeleteStyle>
   );
 };
+
+export default ButtonDelete;
 
 ButtonDelete.propTypes = {
   id: PropTypes.string.isRequired,

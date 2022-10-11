@@ -16,3 +16,6 @@ export const MainPage = styled.div`
     margin-bottom: ${p => p.theme.space[3]}px;
   }
 `;
+export const Title = styled.h1`
+  margin: 0;
+`;

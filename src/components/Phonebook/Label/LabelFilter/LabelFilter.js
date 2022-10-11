@@ -2,7 +2,7 @@ import React from 'react';
 import { LabelFilterStyle } from './LabelFilter.styled';
 import PropTypes from 'prop-types';
 
-export const LabelFilter = ({ title, children }) => (
+const LabelFilter = ({ title, children }) => (
   <LabelFilterStyle>
     <p>{title}</p>
     {children}
@@ -12,3 +12,4 @@ export const LabelFilter = ({ title, children }) => (
 LabelFilter.propTypes = {
   title: PropTypes.string.isRequired,
 };
+export default LabelFilter;

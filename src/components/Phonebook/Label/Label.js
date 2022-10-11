@@ -1,8 +1,8 @@
 import React from 'react';
-import { Label } from './Label.styled';
+import Label from './Label.styled';
 import PropTypes from 'prop-types';
 
-export const LabelPhoneBook = ({ title, children }) => (
+const LabelPhoneBook = ({ title, children }) => (
   <Label>
     <span>{title}</span>
     {children}
@@ -12,3 +12,4 @@ export const LabelPhoneBook = ({ title, children }) => (
 LabelPhoneBook.propTypes = {
   title: PropTypes.string.isRequired,
 };
+export default LabelPhoneBook;

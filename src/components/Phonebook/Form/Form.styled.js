@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Form = styled.form`
+const Form = styled.form`
   padding: ${p => p.theme.space[4]}px;
   width: 500px;
   border: ${p => p.theme.borders.table};
@@ -8,3 +8,4 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
 `;
+export default Form;

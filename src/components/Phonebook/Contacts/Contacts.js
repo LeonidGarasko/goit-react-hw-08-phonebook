@@ -1,19 +1,27 @@
 import React from 'react';
-import { ContactsItem } from './Contacts.styled';
-import { InputFilter } from '../Input/InputFilter/inputFilter';
-import { LabelFilter } from '../Label/LabelFilter/LabelFilter';
-import { ButtonDelete } from '../Button/ButtonDelete/ButtonDelete';
+import ContactsItem from './Contacts.styled';
+import InputFilter from '../Input/InputFilter/inputFilter';
+import LabelFilter from '../Label/LabelFilter/LabelFilter';
+import ButtonDelete from '../Button/ButtonDelete/ButtonDelete';
 import PropTypes from 'prop-types';
-import { useGetContactsQuery } from 'redux/contactsApi';
 import { useSelector } from 'react-redux';
+import {
+  ContactName,
+  ContactNumber,
+  ContactsListItem,
+  ContactsButtons,
+  PhoneLink,
+} from './Contacts.styled';
+import { IoCallSharp } from 'react-icons/io5';
 
-export const Contacts = ({ name }) => {
-  const { data } = useGetContactsQuery();
+const Contacts = ({ name }) => {
+  const data = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.filter);
   const normolizeFilter = filter.toLowerCase();
   const visibleContacts = data.filter(contact =>
     contact.name.toLowerCase().includes(normolizeFilter)
   );
+
   return (
     <ContactsItem>
       <p>{name}</p>
@@ -23,10 +31,20 @@ export const Contacts = ({ name }) => {
       <ul>
         {visibleContacts.map(data => (
           <li key={data.id}>
-            <span>
-              {data.name} {data.number}
-            </span>
-            <ButtonDelete id={data.id} />
+            <ContactsListItem>
+              <ContactName>{data.name}</ContactName>
+              <ContactNumber>{data.number}</ContactNumber>
+            </ContactsListItem>
+            <ContactsButtons>
+              <li key="PhoneLink">
+                <PhoneLink href={'tel:' + data.number}>
+                  <IoCallSharp />
+                </PhoneLink>
+              </li>
+              <li key="ButtonDelete">
+                <ButtonDelete id={data.id} />
+              </li>
+            </ContactsButtons>
           </li>
         ))}
       </ul>
@@ -34,7 +52,8 @@ export const Contacts = ({ name }) => {
   );
 };
 
+export default Contacts;
+
 Contacts.propTypes = {
   name: PropTypes.string.isRequired,
 };
-//dsdsa///

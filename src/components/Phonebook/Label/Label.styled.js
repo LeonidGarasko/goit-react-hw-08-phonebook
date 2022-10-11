@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Label = styled.label`
+const Label = styled.label`
   display: flex;
   flex-direction: column;
   font-size: ${p => p.theme.fontSizes.sl};
@@ -8,3 +8,4 @@ export const Label = styled.label`
     margin-bottom: ${p => p.theme.space[4]}px;
   }
 `;
+export default Label;

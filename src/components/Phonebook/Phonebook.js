@@ -1,17 +1,20 @@
 import { useState } from 'react';
-import { InputName } from './Input/InputName/InputName';
-import { LabelPhoneBook } from './Label/Label';
-import { ButtonSubmit } from './Button/ButtonSubmit';
-import { InputNumber } from './Input/InputNumber/inputNumber';
-import { FormPhonebook } from './Form/Form';
-import { useGetContactsQuery, useAddContactMutation } from 'redux/contactsApi';
 import Notiflix from 'notiflix';
+import { useSelector, useDispatch } from 'react-redux';
 
-export const Phonebook = () => {
+import InputName from './Input/InputName/InputName';
+import LabelPhoneBook from './Label/Label';
+import InputNumber from './Input/InputNumber/inputNumber';
+import FormPhonebook from './Form/Form';
+import contactsOperation from 'redux/contacts/contacts-operation';
+import Button from '@mui/material/Button';
+
+const Phonebook = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const { data: contacts } = useGetContactsQuery();
-  const [addContact] = useAddContactMutation();
+  const [phone, setPhone] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(state => state.contacts.items);
+  const isLoad = useSelector(state => state.contacts.isLoad);
 
   const handleChange = e => {
     switch (e.currentTarget.name) {
@@ -19,46 +22,51 @@ export const Phonebook = () => {
         setName(e.currentTarget.value);
         break;
       case 'number':
-        setNumber(e.currentTarget.value);
+        setPhone(e.currentTarget.value);
         break;
       default:
         return;
     }
   };
+
   const reset = () => {
     setName('');
-    setNumber('');
+    setPhone('');
   };
-  const formSubmitHandle = async data => {
+
+  const formSubmitHandle = data => {
     if (contacts.filter(contact => contact.name === data.name).length > 0) {
       Notiflix.Notify.warning(`${data.name} is already in contacts`);
       return;
     }
-
-    try {
-      await addContact(data);
-      Notiflix.Notify.success('Contact added');
-    } catch (error) {
-      Notiflix.Notify.failure('Something wrong... try again');
-    }
+    dispatch(contactsOperation.addContact(data));
   };
-  const clickOnBtnSubmit = e => {
+
+  const clickOnBtnSubmit = async e => {
     e.preventDefault();
-    formSubmitHandle({ name, number });
+    formSubmitHandle({ name, number: phone });
     reset();
   };
 
   return (
-    <>
-      <FormPhonebook onSubmit={clickOnBtnSubmit}>
-        <LabelPhoneBook title="Name">
-          <InputName value={name} onChange={handleChange} />
-        </LabelPhoneBook>
-        <LabelPhoneBook title="Number">
-          <InputNumber value={number} onChange={handleChange} />
-        </LabelPhoneBook>
-        <ButtonSubmit text="Add contact" />
-      </FormPhonebook>
-    </>
+    <FormPhonebook onSubmit={clickOnBtnSubmit}>
+      <LabelPhoneBook title="Name">
+        <InputName value={name} onChange={handleChange} />
+      </LabelPhoneBook>
+      <LabelPhoneBook title="Number">
+        <InputNumber value={phone} onChange={handleChange} />
+      </LabelPhoneBook>
+      <Button
+        variant="contained"
+        size="medium"
+        type="submit"
+        className="button-signup"
+        disabled={isLoad}
+      >
+        Add
+      </Button>
+    </FormPhonebook>
   );
 };
+
+export default Phonebook;

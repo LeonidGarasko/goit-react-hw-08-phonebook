@@ -1,14 +1,14 @@
 import React from 'react';
-import { MainPage } from './Main.styled';
+import { MainPage, Title } from './Main.styled';
 import PropTypes from 'prop-types';
 
-export const Main = ({ title, children }) => (
+const Main = ({ title, children }) => (
   <MainPage>
-    <h1>{title}</h1>
+    <Title>{title}</Title>
     {children}
   </MainPage>
 );
-
+export default Main;
 Main.propTypes = {
   title: PropTypes.string.isRequired,
 };

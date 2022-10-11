@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input } from '../Input.styled';
+import Input from '../Input.styled';
 import PropTypes from 'prop-types';
 
-export const InputName = ({ onChange, value }) => (
+const InputName = ({ onChange, value }) => (
   <Input
     type="text"
     name="name"
@@ -14,7 +14,7 @@ export const InputName = ({ onChange, value }) => (
     value={value}
   />
 );
-
+export default InputName;
 InputName.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,

@@ -1,9 +1,9 @@
 import React from 'react';
-import { Input } from '../Input.styled';
+import Input from '../Input.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterContacts } from 'redux/contactsSlice';
 
-export const InputFilter = () => {
+const InputFilter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
 
@@ -22,3 +22,4 @@ export const InputFilter = () => {
     </>
   );
 };
+export default InputFilter;

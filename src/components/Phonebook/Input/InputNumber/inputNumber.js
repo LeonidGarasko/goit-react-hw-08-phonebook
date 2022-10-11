@@ -1,8 +1,8 @@
 import React from 'react';
-import { Input } from '../Input.styled';
+import Input from '../Input.styled';
 import PropTypes from 'prop-types';
 
-export const InputNumber = ({ onChange, value }) => (
+const InputNumber = ({ onChange, value }) => (
   <Input
     type="tel"
     name="number"
@@ -14,6 +14,7 @@ export const InputNumber = ({ onChange, value }) => (
     value={value}
   />
 );
+export default InputNumber;
 InputNumber.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
